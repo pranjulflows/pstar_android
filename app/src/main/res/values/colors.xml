@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="headerBG">#2e7dc0</color>
+    <color name="top">#808080</color>
+    <color name="pdf_view_background">#666666</color>
+    <color name="abbreviations_divider_color">#cccccc</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="white10">#ccFFFFFF</color>
+    <color name="primaryText">#212121</color>
+    <color name="secondaryText">#757575</color>
+    <color name="transparent">#00ffffff</color>
+
+</resources>

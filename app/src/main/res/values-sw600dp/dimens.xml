@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_screen_button_width">233dp</dimen>
+    <dimen name="dialog_screen_button_width">160dp</dimen>
+    <dimen name="main_screen_button_height">67dp</dimen>
+    <dimen name="main_text_size">33sp</dimen>
+    <dimen name="dialog_button_padding">40dp</dimen>
+    <dimen name="dialog_premium_message_text_size">20sp</dimen>
+    <dimen name="dialog_premium_title_text_size">26sp</dimen>
+
+</resources>

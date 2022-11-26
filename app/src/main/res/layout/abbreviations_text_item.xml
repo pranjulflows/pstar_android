@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/note_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center_horizontal"
+        android:textStyle="bold"
+        android:padding="@dimen/abbreviations_note_padding"
+        android:textSize="@dimen/abbreviations_note_text_size"/>
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/top"
+        android:padding="@dimen/abbreviations_header_item_padding"
+        android:textSize="@dimen/abbreviations_text_item_size"
+        tools:text="Header text"/>
+
+    <TextView
+        android:id="@+id/item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/abbreviations_text_item_padding_side"
+        android:paddingRight="@dimen/abbreviations_text_item_padding_side"
+        android:paddingTop="@dimen/abbreviations_text_item_padding_top"
+        android:paddingBottom="@dimen/abbreviations_text_item_padding_top"
+        android:textSize="@dimen/abbreviations_text_item_size"
+        tools:text="Item text"/>
+
+    <View
+        android:id="@+id/item_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/abbreviations_divider_color"/>
+
+</LinearLayout>

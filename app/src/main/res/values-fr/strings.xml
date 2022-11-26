@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_purchase_title">Accédez au service Premium</string>
+    <string name="dialog_purchase_message">Accès à toutes les sections du PSTAR,
+échantillons d’examens, guide pour le
+test d’évaluation des compétences
+linguistiques en aviation, guide pour
+l’examen d’opérateur radio avec
+échantillons de questions.</string>
+    <string name="dialog_button_continue">Continuez</string>
+    <string name="dialog_button_cancel">Annulez</string>
+    <string name="dialog_lifetime_purchase">(Si vous avez déjà payé la version complète, vous n’avez pas besoin de payer à nouveau. Il suffit de nous envoyer un email avec la preuve d\'achat à info@pstarexamapp.com pour un code gratuit.)</string>
+
+    <string name="abbreviations_title">Abréviations</string>
+    <string name="abbreviations_note">NOTE: Les abréviations et acronymes suivants peuvent être employés à travers ce guide.</string>
+    <string name="rate_popup_title">Évaluez notre application</string>
+    <string name="rate_popup_message">Si vous aimez notre application, prenez un moment pour l\'évaluer</string>
+    <string name="rate_popup_close">Fermer</string>
+    <string name="rate_popup_rate">Évaluer</string>
+    <string name="rate_popup_feedback">Envoyer des commentaires</string>
+</resources>

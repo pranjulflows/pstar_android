@@ -1,0 +1,30 @@
+AAE - Above Aerodrome Elevation
+ADIZ - Air Defence Identification Zone
+AGL - Above Ground Level
+ASL - Above Sea Level
+ATC - Air Traffic Control
+ATF - Aerodrome Traffic Frequency
+ATIS - Automatic Terminal
+ATS - Air Traffic Services
+CARs - Canadian Aviation Regulations
+CFS - Canada Flight Supplement
+ELT - Emergency Locator Transmitter
+ETA - Estimated Time of Arrival
+FIC - Flight Information Center
+FSS - Flight Service Station
+IFR - Instrument Flight Rules
+Kt. - Knot(s)
+Lb - Pound(s)
+MHz - Megahertz
+MF - Mandatory Frequency
+NM - Nautical Mile(s)
+NORDO - No Radio Information Service
+PIC - Pilot-In-Command
+AIM - Aeronautical Information Manual
+TSB - Transportation Safety Board of Canada
+UNICOM - Universal Communications
+UTC - Co-ordinated Universal Time (Z)
+VDF - Very High Frequency Direction
+VFR - Visual Flight Rules
+VMC - Visual Meteorological Conditions
+AIP – AIP Canada (ICAO)

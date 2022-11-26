@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:background="@drawable/background"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/abbreviations_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/abbreviations_title_text_size"
+        android:gravity="center"
+        android:paddingLeft="@dimen/abbreviations_title_padding_side"
+        android:paddingRight="@dimen/abbreviations_title_padding_side"
+        android:paddingTop="@dimen/abbreviations_title_padding_top"
+        android:paddingBottom="@dimen/abbreviations_title_padding_bottom"
+        tools:text="Abbreviations"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/abbreviations_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/abbreviations_container_padding"/>
+
+</LinearLayout>

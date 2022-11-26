@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splashscreen"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:columnCount="2"
+        android:useDefaultMargins="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/exo_semibold"
+            android:gravity="center"
+            android:text="@string/english_label"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_text_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/exo_semibold"
+            android:gravity="center"
+            android:text="@string/french_label"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_text_size" />
+
+        <ImageView
+            android:id="@+id/img_start_en"
+            android:layout_width="@dimen/main_screen_button_width"
+            android:layout_height="@dimen/main_screen_button_height"
+            android:src="@drawable/pstar_button" />
+
+        <ImageView
+            android:id="@+id/img_start_fr"
+            android:layout_width="@dimen/main_screen_button_width"
+            android:layout_height="@dimen/main_screen_button_height"
+            android:src="@drawable/pstar_button" />
+
+        <ImageView
+            android:id="@+id/img_alpt_en"
+            android:layout_width="@dimen/main_screen_button_width"
+            android:layout_height="@dimen/main_screen_button_height"
+            android:src="@drawable/alpt_en_button" />
+
+        <ImageView
+            android:id="@+id/img_alpt_fr"
+            android:layout_width="@dimen/main_screen_button_width"
+            android:layout_height="@dimen/main_screen_button_height"
+            android:src="@drawable/alpt_fr_button" />
+
+        <ImageView
+            android:id="@+id/img_guide_en"
+            android:layout_width="@dimen/main_screen_button_width"
+            android:layout_height="@dimen/main_screen_button_height"
+            android:src="@drawable/guide_en_button" />
+
+        <ImageView
+            android:id="@+id/img_guide_fr"
+            android:layout_width="@dimen/main_screen_button_width"
+            android:layout_height="@dimen/main_screen_button_height"
+            android:src="@drawable/guide_fr_button" />
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/link_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal|center"
+        android:padding="2dp"
+        android:text="Visit: www.PSTARexamAPP.com"
+        android:textColor="#e2e2e2"
+        android:textSize="9dp" />
+
+</LinearLayout>

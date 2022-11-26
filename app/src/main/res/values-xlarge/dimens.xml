@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="abbreviations_text_item_size">20sp</dimen>
+    <dimen name="abbreviations_note_text_size">24sp</dimen>
+    <dimen name="abbreviations_title_text_size">30sp</dimen>
+</resources>

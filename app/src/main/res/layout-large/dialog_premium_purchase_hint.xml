@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="500dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginEnd="@dimen/dialog_item_side_padding"
+    android:layout_marginLeft="@dimen/dialog_item_side_padding"
+    android:layout_marginRight="@dimen/dialog_item_side_padding"
+    android:layout_marginStart="@dimen/dialog_item_side_padding"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_gradient_blue"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dialog_item_side_padding"
+            android:paddingEnd="@dimen/dialog_item_side_padding"
+            android:paddingLeft="@dimen/dialog_layout_small_padding"
+            android:paddingRight="@dimen/dialog_layout_small_padding"
+            android:paddingStart="@dimen/dialog_layout_small_padding"
+            android:paddingTop="@dimen/dialog_item_side_padding">
+
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dialog_layout_small_padding"
+                android:contentDescription="TODO"
+                android:src="@drawable/premium_dialog_icon_updated" />
+
+
+            <TextView
+                android:id="@+id/textView_dialog_purchase_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dialog_item_side_padding"
+                android:fontFamily="@font/exo_black"
+                android:gravity="center"
+                android:text="@string/dialog_purchase_title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dialog_premium_title_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView_dialog_purchase_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/exo_semibold"
+                android:gravity="center"
+                android:text="@string/dialog_purchase_message"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dialog_premium_message_text_size" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/dialog_item_side_padding">
+
+                <Button
+                    android:id="@+id/button_confirm"
+                    android:layout_width="206dp"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="@dimen/dialog_item_side_padding"
+                    android:background="@drawable/background_premium_dialog_button"
+                    android:fontFamily="@font/exo_semibold"
+                    android:paddingBottom="@dimen/dialog_layout_small_padding"
+                    android:paddingEnd="4dp"
+                    android:paddingStart="4dp"
+                    android:text="@string/dialog_button_continue"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dialog_premium_title_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/button_cancel"
+                    android:layout_width="@dimen/dialog_screen_button_width"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/exo_extralight"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/dialog_button_cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dialog_premium_message_text_size" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView_dialog_purchase_promotion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/exo_extralight"
+                android:gravity="center"
+                android:text="@string/dialog_lifetime_purchase"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

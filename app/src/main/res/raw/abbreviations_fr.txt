@@ -1,0 +1,30 @@
+AAE – Altitude au-dessus de l’aérodrome
+ADIZ – Zone d’identification de défense aérienne
+AGL – Au-dessus du sol
+AIM de TC – Manuel d’information aéronautique
+ASL – Au-dessus du niveau de la mer
+ATC – Contrôle de la circulation aérienne
+ATF – Fréquence de trafic d’aérodrome
+ATIS – Service automatique d’information terminale
+ATS – Services de la circulation aérienne
+BST – Bureau de la sécurité des transports du Canada
+CFS – Supplément de vol – Canada
+ELT – Radiobalise de secours
+ETA – Heure d’arrivée prévue
+FIC – Centre d’information de vol
+FSS – Station d’information de vol
+IFR – Règles de vol aux instruments
+kt – Noeud(s)
+lb – Livre(s)
+MHz – Megahertz
+MF – Fréquence obligatoire
+NM – Mille(s) marin
+NORDO – Sans radio
+PIC – Pilote commandant de bord
+RAC – Règlement de l’aviation canadien
+UNICOM – Service privé de consultation radiophonique aux aérodromes non-contrôlés
+UTC – Temps universel coordonné (Zulu)
+VDF – Radiogoniomètre très haute fréquence
+VFR – Règles de vol à vue
+VMC – Conditions météorologiques de vol à vue
+AIP – AIP Canada (OACI)

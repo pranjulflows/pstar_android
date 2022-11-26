@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">PSTAR</string>
+    <string name="english_label" translatable="false">English</string>
+    <string name="french_label" translatable="false">French</string>
+    <string name="dialog_purchase_title">Get Premium Access Today</string>
+    <string name="dialog_purchase_message">Get access to all PSTAR sections,
+unlimited Sample Exams, the Aviation
+Language Proficiency Test Guide, the
+Radio Study Guide for the Restricted
+Operator Certificate (ROC-A) with
+sample questions, and future updates!</string>
+    <string name="dialog_button_continue">Continue</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_lifetime_purchase">(If you have previously paid for the full version, you do not need to pay again. Just send us an email with prove of purchase to info@pstarexamapp.com for a free code.)</string>
+
+    <string name="abbreviations_title">Abbreviations</string>
+    <string name="abbreviations_note">NOTE: The abbreviations and acronyms listed below may be used throughout the PSTAR exam.</string>
+    <string name="rate_popup_title">Rate Our App</string>
+    <string name="rate_popup_message">If you love our app, please take a moment to rate it</string>
+    <string name="rate_popup_close">Close</string>
+    <string name="rate_popup_rate">Rate</string>
+    <string name="rate_popup_feedback">Send Feedback</string>
+
+
+</resources>
