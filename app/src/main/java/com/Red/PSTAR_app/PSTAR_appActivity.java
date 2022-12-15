@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.Red.PSTAR_app.utils.AppConstants;
 import com.Red.PSTAR_app.utils.IabHelper;
 import com.Red.PSTAR_app.utils.IabResult;
@@ -31,14 +33,15 @@ import com.Red.PSTAR_app.utils.PSTARApp;
 import com.Red.PSTAR_app.utils.Purchase;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.google.common.collect.ImmutableList;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import database.DBAdapter;
 import database.UserIdContractClass;
@@ -77,76 +80,20 @@ public class PSTAR_appActivity extends Activity {
                 clearAppData();
             }
         }
+
+
+
         initializePreferences();
         validatePaidUser();
         setUpPremiumDialogMessageString();
         setContentView(R.layout.main);
         setCallbacks();
-//        setupPurchase();
-        setupPurchaseNew();
-    }
-
-    private void setupPurchaseNew() {
-        billingClient = BillingClient.newBuilder(this)
-                .setListener(purchasesUpdatedListener)
-                .enablePendingPurchases()
-                .build();
-
-        billingClient.startConnection(new BillingClientStateListener() {
-            @Override
-            public void onBillingSetupFinished(BillingResult billingResult) {
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    // The BillingClient is ready. You can query purchases here.
-                }
-            }
-
-            @Override
-            public void onBillingServiceDisconnected() {
-                // Try to restart the connection on the next request to
-                // Google Play by calling the startConnection() method.
-            }
-        });
-
-        QueryProductDetailsParams queryProductDetailsParams =
-                QueryProductDetailsParams.newBuilder()
-                        .setProductList(
-                                Collections.singletonList(
-                                        QueryProductDetailsParams.Product.newBuilder()
-                                                .setProductId(AppConstants.SKU_LIFE_TIME_PACKAGE)
-                                                .setProductType(BillingClient.ProductType.INAPP)
-                                                .build()))
-
-                        .build();
-
-        billingClient.queryProductDetailsAsync(
-                queryProductDetailsParams,
-                (billingResult, productDetailsList) -> {
-                    // check billingResult
-                    // process returned productDetailsList
-                    if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-
-                        for (ProductDetails productDetails : productDetailsList) {
-                            Log.e(TAG, "setupPurchaseNew: "+productDetails.toString() );
-                            //This list should contain the products added above
-                        }
-                    }
-                }
-        );
-
-    }
-
-    private final PurchasesUpdatedListener purchasesUpdatedListener = (billingResult, purchases) -> {
-        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
-            for (com.android.billingclient.api.Purchase purchase : purchases) {
-//                        handleNonConcumablePurchase(purchase)
-                Log.e(TAG, "Purchase purchase : "+purchase.getProducts() );
-            }
-        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
-            // Handle an error caused by a user cancelling the purchase flow.
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            setupPurchase();
         } else {
-            // Handle any other error codes.
+            setupPurchaseNew();
         }
-    };
+    }
 
     private void validatePaidUser() {
         DBAdapter mDbAdapter = new DBAdapter(this);
@@ -203,8 +150,10 @@ public class PSTAR_appActivity extends Activity {
             startActivity(i);
         });
 
+
         View altpEn = findViewById(R.id.img_alpt_en);
         altpEn.setOnClickListener(v -> {
+//            throw new RuntimeException("Test Crash"); // Force a crash
 
             PSTARApp.getInstance().getSharedPreferences(AppConstants.MY_PREF, MODE_PRIVATE).edit().putString(AppConstants.PREF_LANG, AppConstants.EN).apply();
 
@@ -286,44 +235,44 @@ public class PSTAR_appActivity extends Activity {
                 null);
     }
 
-//    private void setupPurchase() {
-//
-//
-//        // compute your public key and store it in base64EncodedPublicKey
-//        mHelper = new IabHelper(PSTAR_appActivity.this, inAppKey);
-//
-//        // enable debug logging (for a production application, you should set this to false).
-//        mHelper.enableDebugLogging(true);
-//
-//        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-//            @Override
-//            public void onIabSetupFinished(IabResult result) {
-//                if (!result.isSuccess()) {
-//
-//                    mSetupMessage = result.toString();
-//                    Log.d(TAG, result.getMessage() + " " + result.getResponse());
-//
-//                    return;
-//                }
-//                // Have we been disposed of in the meantime? If so, quit.
-//                if (mHelper == null) {
-//
-//                    return;
-//                }
-//
-//                isSetup = true;
-//
-//                Log.d(TAG, "In app Billing Setup Successfully !");
-//
-//                try {
-//                    mHelper.queryInventoryAsync(mGotInventoryPremiumListener);
-//                } catch (IabHelper.IabAsyncInProgressException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
-//    }
+    private void setupPurchase() {
+
+
+        // compute your public key and store it in base64EncodedPublicKey
+        mHelper = new IabHelper(PSTAR_appActivity.this, inAppKey);
+
+        // enable debug logging (for a production application, you should set this to false).
+        mHelper.enableDebugLogging(true);
+
+        mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+            @Override
+            public void onIabSetupFinished(IabResult result) {
+                if (!result.isSuccess()) {
+
+                    mSetupMessage = result.toString();
+                    Log.d(TAG, result.getMessage() + " " + result.getResponse());
+
+                    return;
+                }
+                // Have we been disposed of in the meantime? If so, quit.
+                if (mHelper == null) {
+
+                    return;
+                }
+
+                isSetup = true;
+
+                Log.d(TAG, "In app Billing Setup Successfully !");
+
+                try {
+                    mHelper.queryInventoryAsync(mGotInventoryPremiumListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
 
     private void clearAppData() {
         try {
@@ -497,25 +446,42 @@ public class PSTAR_appActivity extends Activity {
             mContinueButton.setTextSize(mainTextSize);
             mCancelTextView.setTextSize(subTextSize);
         }
+
         mContinueButton.setOnClickListener(view -> {
 
             Log.d(TAG, "Start In App Billing");
             try {
                 if (isSetup) {
-                    mHelper.queryInventoryAsync(mGotInventoryListener);
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                        mHelper.queryInventoryAsync(mGotInventoryListener);
+
+                    } else {
+                        ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = com.google.common.collect.ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
+                                // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                                .setProductDetails(productDetails)
+                                // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                                // for a list of offers that are available to the user
+                                .build());
+                        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
+
+// Launch the billing flow
+                        BillingResult billingResult = billingClient.launchBillingFlow(this, billingFlowParams);
+
+                    }
+
                 } else {
                     Toast.makeText(getApplicationContext(), mSetupMessage, Toast.LENGTH_LONG).show();
                 }
 
-            } catch (IabHelper.IabAsyncInProgressException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
             dialog.dismiss();
 
         });
-        mCancelTextView.setOnClickListener(view -> dialog.dismiss());
 
+        mCancelTextView.setOnClickListener(view -> dialog.dismiss());
 
         dialog.show();
 
@@ -528,10 +494,71 @@ public class PSTAR_appActivity extends Activity {
         int y = (int) (point.y * 1);
 
         dialog.setCanceledOnTouchOutside(false);
-
         dialog.getWindow().setLayout(x, y);
+    }
+
+    ProductDetails productDetails;
+
+    private void setupPurchaseNew() {
+
+        billingClient = BillingClient.newBuilder(this).setListener(purchasesUpdatedListener).enablePendingPurchases().build();
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+
+                Log.e(TAG, "onBillingSetupFinished: "+billingResult.getResponseCode());
+                Log.e(TAG, "onBillingSetupFinished: "+billingResult.getDebugMessage());
+
+                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                    // The BillingClient is ready. You can query purchases here.
+                    isSetup = true;
+                    Log.e(TAG, "onBillingSetupFinished: ");
+                    queryPurchases();
+                }
+            }
+
+            @Override
+            public void onBillingServiceDisconnected() {
+                // Try to restart the connection on the next request to
+                // Google Play by calling the startConnection() method.
+            }
+        });
+
 
     }
+
+
+    void queryPurchases() {
+        QueryProductDetailsParams queryProductDetailsParams = QueryProductDetailsParams.newBuilder().setProductList(Collections.singletonList(QueryProductDetailsParams.Product.newBuilder().setProductId(AppConstants.SKU_LIFE_TIME_PACKAGE).setProductType(BillingClient.ProductType.INAPP).build())).build();
+
+        billingClient.queryProductDetailsAsync(queryProductDetailsParams, (billingResult, productDetailsList) -> {
+            // check billingResult
+            // process returned productDetailsList
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                productDetails = productDetailsList.get(0);
+
+                Log.e(TAG, productDetailsList.size() + " setupPurchaseNew: " + productDetailsList.get(0).toString());
+                //This list should contain the products added above
+
+            }
+        });
+    }
+
+
+    private final PurchasesUpdatedListener purchasesUpdatedListener = (billingResult, purchases) -> {
+        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
+            for (com.android.billingclient.api.Purchase purchase : purchases) {
+//                        handleNonConcumablePurchase(purchase)
+                Log.e(TAG, "Purchase purchase : " + purchase.getProducts());
+            }
+        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
+            // Handle an error caused by a user cancelling the purchase flow.
+        } else {
+            // Handle any other error codes.
+        }
+    };
+
 
     private void setUpPremiumDialogMessageString() {
 

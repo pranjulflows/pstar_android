@@ -1,6 +1,6 @@
 package com.Red.PSTAR_app.localization;
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 /**
  * Created by Alexey Matrosov on 29.09.2018.

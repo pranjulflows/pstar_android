@@ -1,8 +1,8 @@
 package com.Red.PSTAR_app.localization;
 
 import android.content.res.Resources;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.RawRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.RawRes;
 import android.util.Log;
 
 import com.Red.PSTAR_app.R;

@@ -1,23 +1,5 @@
 package database;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
-
-import com.Red.PSTAR_app.Question;
-import com.Red.PSTAR_app.Score;
-import com.Red.PSTAR_app.localization.CategoryKey;
-import com.Red.PSTAR_app.utils.AppConstants;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static database.DBConstants.COLUMN_A;
 import static database.DBConstants.COLUMN_APP_VERSION_CODE;
 import static database.DBConstants.COLUMN_B;
@@ -36,6 +18,25 @@ import static database.DBConstants.TABLE_QUESTIONS;
 import static database.DBConstants.TABLE_SCORE_EN;
 import static database.DBConstants.TABLE_SCORE_FR;
 import static database.DBConstants.TABLE_USER;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.Red.PSTAR_app.Question;
+import com.Red.PSTAR_app.Score;
+import com.Red.PSTAR_app.localization.CategoryKey;
+import com.Red.PSTAR_app.utils.AppConstants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBAdapter extends SQLiteOpenHelper {
     private static final String DbName = "app_db";
@@ -146,8 +147,8 @@ public class DBAdapter extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         Score score = new Score();
-                        score.category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY_KEY));
-                        score.right = cursor.getString(cursor.getColumnIndex(COLUMN_RIGHT));
+                        score.category = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_KEY));
+                        score.right = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RIGHT));
                         Scores.add(score);
                     } while (cursor.moveToNext());
                 }
@@ -205,13 +206,13 @@ public class DBAdapter extends SQLiteOpenHelper {
                 if (cursor.moveToFirst()) {
                     do {
                         Question question = new Question();
-                        question.Qno = cursor.getString(cursor.getColumnIndex(COLUMN_QNO));
-                        question.Question = cursor.getString(cursor.getColumnIndex(COLUMN_QUESTION));
-                        question.A = SentenceCase(cursor.getString(cursor.getColumnIndex(COLUMN_A)));
-                        question.B = SentenceCase(cursor.getString(cursor.getColumnIndex(COLUMN_B)));
-                        question.C = SentenceCase(cursor.getString(cursor.getColumnIndex(COLUMN_C)));
-                        question.D = SentenceCase(cursor.getString(cursor.getColumnIndex(COLUMN_D)));
-                        question.Correct = cursor.getString(cursor.getColumnIndex(COLUMN_CORRECT));
+                        question.Qno = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_QNO));
+                        question.Question = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_QUESTION));
+                        question.A = SentenceCase(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_A)));
+                        question.B = SentenceCase(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_B)));
+                        question.C = SentenceCase(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_C)));
+                        question.D = SentenceCase(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_D)));
+                        question.Correct = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CORRECT));
                         question.Category = CategoryKey.getKeyByNumber(question.Qno);
                         list.add(question);
                     } while (cursor.moveToNext());
@@ -223,7 +224,9 @@ public class DBAdapter extends SQLiteOpenHelper {
                     cursor.close();
                 }
                 try {
-                    internalDB.endTransaction();
+                    if (internalDB.inTransaction()) {
+                        internalDB.endTransaction();
+                    }
                 } catch (Exception e) {
                     Log.e(TAG, "getQuestions: ", e);
                 }

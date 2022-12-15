@@ -3,7 +3,7 @@ package com.Red.PSTAR_app.utils;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.os.Build;
-import android.support.v7.app.AppCompatDelegate;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.Red.PSTAR_app.localization.CategoryKey;
 

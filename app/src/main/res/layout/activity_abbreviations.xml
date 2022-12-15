@@ -21,7 +21,7 @@
         android:paddingBottom="@dimen/abbreviations_title_padding_bottom"
         tools:text="Abbreviations"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/abbreviations_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

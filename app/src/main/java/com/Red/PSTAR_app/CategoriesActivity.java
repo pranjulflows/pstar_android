@@ -14,6 +14,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -24,6 +25,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.Red.PSTAR_app.helpers.RateUsHelper;
 import com.Red.PSTAR_app.localization.CategoryKey;
@@ -108,8 +112,11 @@ public class CategoriesActivity extends Activity implements OnClickListener {
             Handler handler = new Handler();
             handler.postDelayed(() -> RateUsHelper.showIfNeed(CategoriesActivity.this), 1000);
         }
-
-        setupPurchaseNew();
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            setupPurchase();
+        } else {
+            setupPurchaseNew();
+        }
     }
 
     private void setupPurchaseNew() {
@@ -117,7 +124,7 @@ public class CategoriesActivity extends Activity implements OnClickListener {
 
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
-            public void onBillingSetupFinished(BillingResult billingResult) {
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here.
                     Log.e(TAG, "onBillingSetupFinished: ");
@@ -515,7 +522,6 @@ public class CategoriesActivity extends Activity implements OnClickListener {
 
     private void setupPurchase() {
 
-
         // compute your public key and store it in base64EncodedPublicKey
         mHelper = new IabHelper(CategoriesActivity.this, inAppKey);
 
@@ -677,29 +683,33 @@ public class CategoriesActivity extends Activity implements OnClickListener {
             mCancelTextView.setTextSize(subTextSize);
         }
         mContinueButton.setOnClickListener(view -> {
-            ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = com.google.common.collect.ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
-                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                    .setProductDetails(productDetails)
-                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                    // for a list of offers that are available to the user
-                    .build());
-            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
+
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                try {
+                    if (isSetup) {
+                        mHelper.queryInventoryAsync(mGotInventoryListener);
+                    } else {
+                        Toast.makeText(getApplicationContext(), mSetupMessage, Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = com.google.common.collect.ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
+                        // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                        .setProductDetails(productDetails)
+                        // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                        // for a list of offers that are available to the user
+                        .build());
+                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
 
 // Launch the billing flow
-            BillingResult billingResult = billingClient.launchBillingFlow(this, billingFlowParams);
+                BillingResult billingResult = billingClient.launchBillingFlow(this, billingFlowParams);
 
-
+            }
 //            Log.d(TAG, "Start In App Billing");
-//            try {
-//                if (isSetup) {
-//                    mHelper.queryInventoryAsync(mGotInventoryListener);
-//                } else {
-//                    Toast.makeText(getApplicationContext(), mSetupMessage, Toast.LENGTH_LONG).show();
-//                }
-//
-//            } catch (IabHelper.IabAsyncInProgressException e) {
-//                e.printStackTrace();
-//            }
+
 
             dialog.dismiss();
 
