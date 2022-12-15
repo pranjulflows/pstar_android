@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "635336047004",
+    "project_id": "pstar-3-1-master",
+    "storage_bucket": "pstar-3-1-master.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635336047004:android:150c264e426afca5b9b059",
+        "android_client_info": {
+          "package_name": "com.Red.PSTAR_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "635336047004-m67boovfbff12phc65pkimvvadiie0rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtcbW04NzTPI-DRW8D9Y9yk_nCCZ1ctdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "635336047004-m67boovfbff12phc65pkimvvadiie0rv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
