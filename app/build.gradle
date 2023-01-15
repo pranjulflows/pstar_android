@@ -8,8 +8,8 @@ android {
         applicationId "com.Red.PSTAR_app"
         minSdkVersion 19
         targetSdkVersion 31
-        versionCode 31
-        versionName "3.2.1.01"
+        versionCode 35
+        versionName "3.4.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {

@@ -317,7 +317,6 @@ public class PSTAR_appActivity extends Activity {
 
                 if (inventory.hasPurchase(AppConstants.SKU_LIFE_TIME_PACKAGE)) {
 
-
                     mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
                     startActivity(mCurrentIntent);
                 } else {
@@ -330,7 +329,6 @@ public class PSTAR_appActivity extends Activity {
 
                     } catch (IabHelper.IabAsyncInProgressException e) {
                         e.printStackTrace();
-
                     }
                 }
             }
@@ -551,12 +549,17 @@ public class PSTAR_appActivity extends Activity {
             for (com.android.billingclient.api.Purchase purchase : purchases) {
 //                        handleNonConcumablePurchase(purchase)
                 Log.e(TAG, "Purchase purchase : " + purchase.getProducts());
+                mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
+
             }
         } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
             // Handle an error caused by a user cancelling the purchase flow.
-        } else {
-            // Handle any other error codes.
+        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+            mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
+
         }
+        Log.e(TAG, "purchasesUpdatedListener : " + billingResult.getResponseCode());
+
     };
 
 
