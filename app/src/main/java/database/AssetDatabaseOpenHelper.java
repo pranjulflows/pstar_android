@@ -44,7 +44,9 @@ public class AssetDatabaseOpenHelper {
         os.flush();
         os.close();
         is.close();
-        return SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.OPEN_READWRITE);
+        SQLiteDatabase sqLiteDatabase = SQLiteDatabase.openDatabase(dbFile.getPath(), null, SQLiteDatabase.OPEN_READWRITE);
+        sqLiteDatabase.needUpgrade(24);
+        return sqLiteDatabase;
     }
 
 }

@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="dialog_purchase_title">Accédez au service Premium</string>
-    <string name="dialog_purchase_message">Accès à toutes les sections du PSTAR,
-échantillons d’examens, guide pour le
-test d’évaluation des compétences
-linguistiques en aviation, guide pour
-l’examen d’opérateur radio avec
-échantillons de questions.</string>
+    <!--        Accès à toutes les sections du PSTAR,-->
+    <!--échantillons d’examens, guide pour le-->
+    <!--test d’évaluation des compétences-->
+    <!--linguistiques en aviation, guide pour-->
+    <!--l’examen d’opérateur radio avec-->
+    <!--échantillons de questions.-->
+    <string name="dialog_purchase_message">
+    Accès à toutes les sections
+du PSTAR, échantillons d\'examens, et les futures mises à jour!
+    </string>
     <string name="dialog_button_continue">Continuez</string>
     <string name="dialog_button_cancel">Annulez</string>
     <string name="dialog_lifetime_purchase">(Si vous avez déjà payé la version complète, vous n’avez pas besoin de payer à nouveau. Il suffit de nous envoyer un email avec la preuve d\'achat à info@pstarexamapp.com pour un code gratuit.)</string>

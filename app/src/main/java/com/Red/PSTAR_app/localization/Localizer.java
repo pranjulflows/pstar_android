@@ -198,8 +198,10 @@ public class Localizer {
         localizedValues.put("rate_popup_feedback", new LocalizedData("Send Feedback", "Envoyer des commentaires"));
 
         localizedValues.put(AppConstants.DIALOG_PURCHASE_TITLE, new LocalizedData("Get Premium Access Today", "Accédez au service Premium"));
-        localizedValues.put(AppConstants.DIALOG_PURCHASE_MESSAGE, new LocalizedData("Get access to all PSTAR sections,  unlimited Sample Exams, the Aviation Language Proficiency Test Guide, the Radio Study Guide for the Restricted Operator Certificate (ROC-A) with sample questions, and future updates!",
-                "Accès à toutes les sections du PSTAR, échantillons d’examens, guide pour le test d’évaluation des compétences linguistiques en aviation, guide pour l’examen d’opérateur radio avec échantillons de questions"));
+        localizedValues.put(AppConstants.DIALOG_PURCHASE_MESSAGE, new LocalizedData("Get access to all PSTAR sections,  unlimited Sample Exams, and future updates!",
+                "Accès à toutes les sections du PSTAR, échantillons d'examens, et les futures mises à jour!"));
+//        localizedValues.put(AppConstants.DIALOG_PURCHASE_MESSAGE, new LocalizedData("Get access to all PSTAR sections,  unlimited Sample Exams, the Aviation Language Proficiency Test Guide, the Radio Study Guide for the Restricted Operator Certificate (ROC-A) with sample questions, and future updates!",
+//                "Accès à toutes les sections du PSTAR, échantillons d’examens, guide pour le test d’évaluation des compétences linguistiques en aviation, guide pour l’examen d’opérateur radio avec échantillons de questions"));
         localizedValues.put(AppConstants.DIALOG_BUTTON_CONTINUE, new LocalizedData("Continue", "Continuez"));
         localizedValues.put(AppConstants.DIALOG_BUTTON_CANCEL, new LocalizedData("Cancel", "Annulez"));
         localizedValues.put(AppConstants.DIALOG_LIFETIME_PURCHASE, new LocalizedData("(If you have previously paid for the full version, you do not need to pay again. Just send us an email with prove of purchase to info@pstarexamapp.com for a free code.)", "(Si vous avez déjà payé la version complète, vous n’avez pas besoin de payer à nouveau. Il suffit de nous envoyer un email avec la preuve d'achat à info@pstarexamapp.com pour un code gratuit.)"));

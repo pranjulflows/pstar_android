@@ -5,8 +5,8 @@ public final class AppConstants {
     public static final String MY_PREF = "Pref";
     public static final String PREF_LANG = "Pref_My_Lang";
 
-    public static final String EN = "en";
-    public static final String FR = "fr";
+    public static final String EN = "en_v2";
+    public static final String FR = "fr_v2";
 
     public static final String PREF_IS_PREMIUM_USER = "com.Red.PSTAR_app.IS_PREMIUM";
     public static final String SKU_LIFE_TIME_PACKAGE = "com.pstar.transport.canada.pilot";

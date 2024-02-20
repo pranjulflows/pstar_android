@@ -38,6 +38,8 @@ import com.Red.PSTAR_app.utils.IabResult;
 import com.Red.PSTAR_app.utils.Inventory;
 import com.Red.PSTAR_app.utils.MyContextWrapper;
 import com.Red.PSTAR_app.utils.Purchase;
+import com.android.billingclient.api.AcknowledgePurchaseParams;
+import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
@@ -152,7 +154,6 @@ public class CategoriesActivity extends Activity implements OnClickListener {
             // process returned productDetailsList
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                 productDetails = productDetailsList.get(0);
-
                 Log.e(TAG, productDetailsList.size() + " setupPurchaseNew: " + productDetailsList.get(0).toString());
                 //This list should contain the products added above
 
@@ -163,14 +164,33 @@ public class CategoriesActivity extends Activity implements OnClickListener {
     private final PurchasesUpdatedListener purchasesUpdatedListener = (billingResult, purchases) -> {
         if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK && purchases != null) {
             for (com.android.billingclient.api.Purchase purchase : purchases) {
-//                        handleNonConcumablePurchase(purchase)
-                Log.e(TAG, "Purchase purchase : " + purchase.getProducts());
-                mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
+                if (purchase.getPurchaseState()
+                        == com.android.billingclient.api.Purchase.PurchaseState.PURCHASED) {
+
+                    Log.e(TAG, "Purchase purchase : " + purchase.getProducts());
+                    mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
+
+                    Log.e(TAG, "Purchase purchase isAcknowledged: " + purchase.isAcknowledged());
+
+                    if (!purchase.isAcknowledged()) {
+                        AcknowledgePurchaseParams acknowledgePurchaseParams =
+                                AcknowledgePurchaseParams.newBuilder()
+                                        .setPurchaseToken(purchase.getPurchaseToken())
+                                        .build();
+                        billingClient.acknowledgePurchase(acknowledgePurchaseParams, (AcknowledgePurchaseResponseListener) billingResult1 -> {
+                            if (billingResult1.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                                Log.e(TAG, "Purchase purchase acknowledgePurchase: " + purchase.getProducts());
+
+
+                            }
+                        });
+                    }
+                }
 
             }
         } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.USER_CANCELED) {
             // Handle an error caused by a user cancelling the purchase flow.
-        }else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
+        } else if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED) {
             mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
         }
         Log.e(TAG, "purchasesUpdatedListener : " + billingResult.getResponseCode());

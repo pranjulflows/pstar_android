@@ -39,8 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBAdapter extends SQLiteOpenHelper {
-    private static final String DbName = "app_db";
-    private static final int DbVersion = 23;
+    private static final String DbName = "app_db_v2";
+    private static final int DbVersion = 24;
     private static final String TAG = DBAdapter.class.getSimpleName();
 
     private static DBAdapter sInstance;
@@ -71,6 +71,7 @@ public class DBAdapter extends SQLiteOpenHelper {
                 COLUMN_LOCALE + " TEXT" +
                 ")";
         try {
+            db.needUpgrade(24);
             db.execSQL(CREATE_LOCALIZED_QUESTION_TABLE);
         } catch (Exception e) {
             Log.e(TAG, "onCreate: CREATE_LOCALIZED_QUESTION_TABLE ", e);

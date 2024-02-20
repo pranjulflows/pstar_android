@@ -5,11 +5,7 @@
     <string name="french_label" translatable="false">French</string>
     <string name="dialog_purchase_title">Get Premium Access Today</string>
     <string name="dialog_purchase_message">Get access to all PSTAR sections,
-unlimited Sample Exams, the Aviation
-Language Proficiency Test Guide, the
-Radio Study Guide for the Restricted
-Operator Certificate (ROC-A) with
-sample questions, and future updates!</string>
+unlimited Sample Exams, and future updates!</string>
     <string name="dialog_button_continue">Continue</string>
     <string name="dialog_button_cancel">Cancel</string>
     <string name="dialog_lifetime_purchase">(If you have previously paid for the full version, you do not need to pay again. Just send us an email with prove of purchase to info@pstarexamapp.com for a free code.)</string>

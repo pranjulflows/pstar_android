@@ -468,9 +468,7 @@ public class Cat_QuestionsActivity extends Activity implements OnClickListener {
                     lastcheck = false;
                     enableRW();
                 }
-            } else
-
-            {
+            } else {
                 controlBack--;
                 question.setText(All_Question.get(no).Question);
                 choice1.setText(All_Question.get(no).A);

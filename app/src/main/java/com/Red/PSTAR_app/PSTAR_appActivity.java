@@ -157,16 +157,16 @@ public class PSTAR_appActivity extends Activity {
 
             PSTARApp.getInstance().getSharedPreferences(AppConstants.MY_PREF, MODE_PRIVATE).edit().putString(AppConstants.PREF_LANG, AppConstants.EN).apply();
 
-            if (isPaidUser || isPremiumUser()) {
+//            if (isPaidUser || isPremiumUser()) {
                 Log.d(TAG, "isPremiumUser>" + isPremiumUser() + "isPadUser>" + isPaidUser);
                 Intent i = ViewPdfActivity.createIntent(getBaseContext(), "alpt_en.pdf");
                 startActivity(i);
-            } else {
-                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "alpt_en.pdf");
-//                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "alpt_en.pdf");
-//                startActivity(i);
-                showInAppBillingMessageDialog(AppConstants.EN);
-            }
+//            } else {
+//                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "alpt_en.pdf");
+////                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "alpt_en.pdf");
+////                startActivity(i);
+//                showInAppBillingMessageDialog(AppConstants.EN);
+//            }
         });
 
         View altpFr = findViewById(R.id.img_alpt_fr);
@@ -174,15 +174,15 @@ public class PSTAR_appActivity extends Activity {
 
             PSTARApp.getInstance().getSharedPreferences(AppConstants.MY_PREF, MODE_PRIVATE).edit().putString(AppConstants.PREF_LANG, AppConstants.FR).apply();
 
-            if (isPaidUser || isPremiumUser()) {
+//            if (isPaidUser || isPremiumUser()) {
                 Intent i = ViewPdfActivity.createIntent(getBaseContext(), "alpt_fr.pdf");
                 startActivity(i);
-            } else {
-                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "alpt_fr.pdf");
-//                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "alpt_fr.pdf");
-//                startActivity(i);
-                showInAppBillingMessageDialog(AppConstants.FR);
-            }
+//            } else {
+//                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "alpt_fr.pdf");
+////                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "alpt_fr.pdf");
+////                startActivity(i);
+//                showInAppBillingMessageDialog(AppConstants.FR);
+//            }
         });
 
         View guideEn = findViewById(R.id.img_guide_en);
@@ -190,15 +190,15 @@ public class PSTAR_appActivity extends Activity {
 
             PSTARApp.getInstance().getSharedPreferences(AppConstants.MY_PREF, MODE_PRIVATE).edit().putString(AppConstants.PREF_LANG, AppConstants.EN).apply();
 
-            if (isPaidUser || isPremiumUser()) {
+//            if (isPaidUser || isPremiumUser()) {
                 Intent i = ViewPdfActivity.createIntent(getBaseContext(), "guide_en.pdf");
                 startActivity(i);
-            } else {
-                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "guide_en.pdf");
-//                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "guide_en.pdf");
-//                startActivity(i);
-                showInAppBillingMessageDialog(AppConstants.EN);
-            }
+//            } else {
+//                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "guide_en.pdf");
+////                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "guide_en.pdf");
+////                startActivity(i);
+//                showInAppBillingMessageDialog(AppConstants.EN);
+//            }
         });
 
 
@@ -207,15 +207,15 @@ public class PSTAR_appActivity extends Activity {
 
             PSTARApp.getInstance().getSharedPreferences(AppConstants.MY_PREF, MODE_PRIVATE).edit().putString(AppConstants.PREF_LANG, AppConstants.FR).apply();
 
-            if (isPaidUser || isPremiumUser()) {
+//            if (isPaidUser || isPremiumUser()) {
                 Intent i = ViewPdfActivity.createIntent(getBaseContext(), "guide_fr.pdf");
                 startActivity(i);
-            } else {
-                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "guide_fr.pdf");
-//                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "guide_fr.pdf");
-//                startActivity(i);
-                showInAppBillingMessageDialog(AppConstants.FR);
-            }
+//            } else {
+//                mCurrentIntent = ViewPdfActivity.createIntent(getBaseContext(), "guide_fr.pdf");
+////                Intent i = ViewPdfActivity.createIntent(getBaseContext(), "guide_fr.pdf");
+////                startActivity(i);
+//                showInAppBillingMessageDialog(AppConstants.FR);
+//            }
         });
 
         View linkButton = findViewById(R.id.link_button);
@@ -566,24 +566,25 @@ public class PSTAR_appActivity extends Activity {
     private void setUpPremiumDialogMessageString() {
 
         mPremiumDialogEnHashMap.put(AppConstants.DIALOG_PURCHASE_TITLE, "Get Premium Access Today");
-        mPremiumDialogEnHashMap.put(AppConstants.DIALOG_PURCHASE_MESSAGE, "Get access to all PSTAR sections,\n" +
-                "unlimited Sample Exams, the Aviation\n" +
-                "Language Proficiency Test Guide, the\n" +
-                "Radio Study Guide for the Restricted\n" +
-                "Operator Certificate (ROC-A) with\n" +
-                "sample questions, and future updates!");
+//        mPremiumDialogEnHashMap.put(AppConstants.DIALOG_PURCHASE_MESSAGE, "Get access to all PSTAR sections,\n" +
+//                "unlimited Sample Exams, the Aviation\n" +
+//                "Language Proficiency Test Guide, the\n" +
+//                "Radio Study Guide for the Restricted\n" +
+//                "Operator Certificate (ROC-A) with\n" +
+//                "sample questions, and future updates!");
+        mPremiumDialogEnHashMap.put(AppConstants.DIALOG_PURCHASE_MESSAGE, "Get access to all PSTAR sections,\n" +" and future updates!");
         mPremiumDialogEnHashMap.put(AppConstants.DIALOG_BUTTON_CONTINUE, "Continue");
         mPremiumDialogEnHashMap.put(AppConstants.DIALOG_BUTTON_CANCEL, "Cancel");
         mPremiumDialogEnHashMap.put(AppConstants.DIALOG_LIFETIME_PURCHASE, "If you have previously paid for the full version, you do not need to pay again. Just send us an email with prove of purchase to info@pstarexamapp.com for a free code.)");
 
 
         mPremiumDialogFRHashMap.put(AppConstants.DIALOG_PURCHASE_TITLE, "Accédez au service Premium");
-        mPremiumDialogFRHashMap.put(AppConstants.DIALOG_PURCHASE_MESSAGE, "Accès à toutes les sections du PSTAR,\n" +
-                "échantillons d’examens, guide pour le\n" +
-                "test d’évaluation des compétences\n" +
-                "linguistiques en aviation, guide pour\n" +
-                "l’examen d’opérateur radio avec\n" +
-                "échantillons de questions.");
+        mPremiumDialogFRHashMap.put(AppConstants.DIALOG_PURCHASE_MESSAGE, "Accès à toutes les sections du PSTAR,\n échantillons d'examens, et les futures mises à jour!" );
+//                "échantillons d’examens, guide pour le\n" +
+//                "test d’évaluation des compétences\n" +
+//                "linguistiques en aviation, guide pour\n" +
+//                "l’examen d’opérateur radio avec\n" +
+//                "échantillons de questions.");
         mPremiumDialogFRHashMap.put(AppConstants.DIALOG_BUTTON_CONTINUE, "Continuez");
         mPremiumDialogFRHashMap.put(AppConstants.DIALOG_BUTTON_CANCEL, "Annulez");
         mPremiumDialogFRHashMap.put(AppConstants.DIALOG_LIFETIME_PURCHASE, "(Si vous avez déjà payé la version complète, vous n’avez pas besoin de payer à nouveau. Il suffit de nous envoyer un email avec la preuve d\\'achat à info@pstarexamapp.com pour un code gratuit.)");

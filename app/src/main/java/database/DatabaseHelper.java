@@ -47,8 +47,8 @@ public class DatabaseHelper {
         if (cursor.moveToFirst()) {
             do {
                 Score score = new Score();
-                score.category = cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY_KEY));
-                score.right = cursor.getString(cursor.getColumnIndex(COLUMN_RIGHT));
+                score.category = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CATEGORY_KEY));
+                score.right = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_RIGHT));
                 score.total = String.valueOf(getCategoryCount(db, score.category));
 
                 if (Integer.parseInt(score.right) > Integer.parseInt(score.total))
@@ -132,13 +132,13 @@ public class DatabaseHelper {
         if (cursor.moveToFirst()) {
             do {
                 Question pro = new Question();
-                pro.Qno = cursor.getString(cursor.getColumnIndex(COLUMN_QNO));
-                pro.Question = cursor.getString(cursor.getColumnIndex(COLUMN_QUESTION));
-                pro.A = cursor.getString(cursor.getColumnIndex(COLUMN_A));
-                pro.B = cursor.getString(cursor.getColumnIndex(COLUMN_B));
-                pro.C = cursor.getString(cursor.getColumnIndex(COLUMN_C));
-                pro.D = cursor.getString(cursor.getColumnIndex(COLUMN_D));
-                pro.Correct = cursor.getString(cursor.getColumnIndex(COLUMN_CORRECT));
+                pro.Qno = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_QNO));
+                pro.Question = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_QUESTION));
+                pro.A = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_A));
+                pro.B = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_B));
+                pro.C = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_C));
+                pro.D = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_D));
+                pro.Correct = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CORRECT));
                 pro.Category = CategoryKey.getKeyByNumber(pro.Qno);
 
                 questions.add(pro);
