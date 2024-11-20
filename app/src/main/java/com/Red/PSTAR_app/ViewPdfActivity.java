@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.listener.OnErrorListener;
+import com.ymg.pdf.viewer.PDFView;
+import com.ymg.pdf.viewer.listener.OnErrorListener;
 
 /**
  * Created by Alexey Matrosov on 27.09.2018.
@@ -30,7 +30,7 @@ public class ViewPdfActivity extends Activity {
         if (fileName == null)
             finish();
 
-        PDFView pdfView = findViewById(R.id.pdf_view);
+        PDFView pdfView = findViewById(R.id.pdfView);
         pdfView.fromAsset(fileName)
                 .onError(errorListener)
                 .spacing(5)
