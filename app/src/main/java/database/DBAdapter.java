@@ -39,8 +39,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBAdapter extends SQLiteOpenHelper {
-    private static final String DbName = "app_db_v2";
-    private static final int DbVersion = 24;
+    private static final String DbName = "app_db_v3";
+    private static final int DbVersion = 25;
     private static final String TAG = DBAdapter.class.getSimpleName();
 
     private static DBAdapter sInstance;
