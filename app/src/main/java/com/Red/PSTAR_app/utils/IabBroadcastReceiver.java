@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.Red.PSTAR_app.utils;;
+package com.Red.PSTAR_app.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

@@ -4,12 +4,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'      // Ensure this is added
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 36
 
     defaultConfig {
         applicationId "com.Red.PSTAR_app"
         minSdkVersion 24
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 40
         versionName "3.6.3"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -25,13 +25,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-
+    // ✅ Explicitly tell Kotlin to target JVM 17
+    kotlinOptions {
+        jvmTarget = "17"
+    }
     lintOptions {
         checkReleaseBuilds false
         // Or, if you prefer, you can continue to check for errors in release builds,
         // but continue the build even when errors are found:
         abortOnError false
     }
+    namespace 'com.Red.PSTAR_app'
 }
 
 dependencies {
@@ -41,7 +45,9 @@ dependencies {
 //    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 //    implementation 'io.github.afreakyelf:Pdf-Viewer:2.1.1'
-    implementation 'com.github.iamyashchouhan:AndroidPdfViewer:1.0.3'
+//    implementation 'com.github.iamyashchouhan:AndroidPdfViewer:1.0.3'
+    implementation "io.github.oothp:android-pdf-viewer:3.2.0-beta05"
+
 
     implementation "com.android.billingclient:billing:7.1.1"
     implementation 'com.google.guava:guava:30.1-jre'
@@ -50,11 +56,11 @@ dependencies {
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
 
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.13.1'
 
     // Custom fonts
-    implementation 'io.github.inflationx:calligraphy3:3.0.0'
-    implementation 'io.github.inflationx:viewpump:1.0.0'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.1.1'
 //    implementation("com.google.firebase:firebase-crashlytics")
 //    implementation("com.google.firebase:firebase-analytics")
 }

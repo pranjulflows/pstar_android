@@ -14,7 +14,6 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -25,7 +24,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -33,11 +31,7 @@ import com.Red.PSTAR_app.helpers.RateUsHelper;
 import com.Red.PSTAR_app.localization.CategoryKey;
 import com.Red.PSTAR_app.utils.AppConstants;
 import com.Red.PSTAR_app.utils.AppSharedMethod;
-import com.Red.PSTAR_app.utils.IabHelper;
-import com.Red.PSTAR_app.utils.IabResult;
-import com.Red.PSTAR_app.utils.Inventory;
 import com.Red.PSTAR_app.utils.MyContextWrapper;
-import com.Red.PSTAR_app.utils.Purchase;
 import com.android.billingclient.api.AcknowledgePurchaseParams;
 import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
 import com.android.billingclient.api.BillingClient;
@@ -68,12 +62,7 @@ public class CategoriesActivity extends Activity implements OnClickListener {
     private int mCurrentScoreIndex = 0;
     private String mCurrentCategoryKey = "";
 
-
     private String inAppKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqgZzIGmF6MBDw89t1Xq8jm1ZNd5DtT2DBiVp8+jcv4zUvGwuJdE7imE5r2EQqnMzXxxaL+BVSjouvBHfuR11J+sTw3MF9nqUxtUEzqo8DkCr7eZo8nNolafVt4Rfb8cvdI+PidpfxSac5P7qzYn0gRwXHRfmwMdsslwSA1KFJH1+Yq9SbW8kPIUiavQZN47vq+iWmWqwn/tLjwu9piFJr5Fn7J2seVkhcVQRbfRBQYtF0aUC4gxMLovqV70d/e8PQNOAG5KllntoAPup9SF4ljpFSr94lpBlxVojhayAuN/Mdasls9X6EB1h2UxxKivtcnkYV7zERMR4YJhNS7vZRwIDAQAB";
-    private IabHelper mHelper;
-    private String mSetupMessage = "";
-    private final int RC_REQUEST = 10001;
-    private boolean isSetup = false;
 
     private ImageView mCatCollisionImageView;
     private ImageView mCatSignalImageView;
@@ -114,11 +103,7 @@ public class CategoriesActivity extends Activity implements OnClickListener {
             Handler handler = new Handler();
             handler.postDelayed(() -> RateUsHelper.showIfNeed(CategoriesActivity.this), 1000);
         }
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-            setupPurchase();
-        } else {
-            setupPurchaseNew();
-        }
+        setupPurchaseNew();
     }
 
     private void setupPurchaseNew() {
@@ -544,129 +529,10 @@ public class CategoriesActivity extends Activity implements OnClickListener {
         return mDb.query(DBConstants.TABLE_USER, null, null, null, null, null, null);
     }
 
-    private void setupPurchase() {
-
-        // compute your public key and store it in base64EncodedPublicKey
-        mHelper = new IabHelper(CategoriesActivity.this, inAppKey);
-
-        // enable debug logging (for a production application, you should set this to false).
-        mHelper.enableDebugLogging(true);
-
-        mHelper.startSetup(result -> {
-            if (!result.isSuccess()) {
-
-                mSetupMessage = result.toString();
-                Log.d(TAG, result.getMessage() + " " + result.getResponse());
-
-                return;
-            }
-            // Have we been disposed of in the meantime? If so, quit.
-            if (mHelper == null) {
-
-                return;
-            }
-
-            isSetup = true;
-
-            Log.d(TAG, "In app Billing Setup Successfully !");
-
-            try {
-                mHelper.queryInventoryAsync(mGotInventoryPremiumListener);
-            } catch (IabHelper.IabAsyncInProgressException e) {
-                e.printStackTrace();
-            }
-
-        });
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.d(getClass().getName(), "onActivityResult(" + requestCode + "," + resultCode + "," + data);
-        if (mHelper == null) return;
-
-        // Pass on the activity result to the helper for handling
-        if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
-            // not handled, so handle it ourselves (here's where you'd
-            // perform any handling of activity results not related to in-app
-            // billing...
-            super.onActivityResult(requestCode, resultCode, data);
-        } else {
-            Log.d(TAG, "onActivityResult handled by IABUtil.");
-        }
     }
-
-    IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-        public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-
-            if (result.isFailure()) {
-
-            } else {
-
-                if (inventory.hasPurchase(AppConstants.SKU_LIFE_TIME_PACKAGE)) {
-
-                    mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
-                    if (mCurrentScoreIndex != 14) {
-                        categoryClickImplementations(mCurrentScoreIndex, mCurrentCategoryKey);
-                    } else {
-                        goToExamScreen();
-                    }
-                } else {
-
-                    mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, false).apply();
-
-                    try {
-                        mHelper.launchPurchaseFlow(CategoriesActivity.this, AppConstants.SKU_LIFE_TIME_PACKAGE, RC_REQUEST, mPurchaseFinishedListener, "");
-
-                    } catch (IabHelper.IabAsyncInProgressException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-    };
-
-
-    IabHelper.QueryInventoryFinishedListener mGotInventoryPremiumListener = new IabHelper.QueryInventoryFinishedListener() {
-        public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-
-            if (result.isFailure()) {
-
-            } else {
-
-                if (inventory.hasPurchase(AppConstants.SKU_LIFE_TIME_PACKAGE)) {
-
-                    mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
-                } else {
-                    mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, false).apply();
-                }
-            }
-        }
-    };
-
-
-    IabHelper.OnIabPurchaseFinishedListener mPurchaseFinishedListener = new IabHelper.OnIabPurchaseFinishedListener() {
-        public void onIabPurchaseFinished(IabResult result, Purchase purchase) {
-
-
-            if (result.isFailure()) {
-
-                return;
-            }
-
-
-            if (mHelper == null) {
-                return;
-            }
-
-            mEditor.putBoolean(AppConstants.PREF_IS_PREMIUM_USER, true).apply();
-
-            if (mCurrentScoreIndex != 14) {
-                categoryClickImplementations(mCurrentScoreIndex, mCurrentCategoryKey);
-            } else {
-                goToExamScreen();
-            }
-        }
-    };
 
     public void showInAppBillingMessageDialog() {
         final Dialog dialog = new Dialog(this);
@@ -708,31 +574,18 @@ public class CategoriesActivity extends Activity implements OnClickListener {
         }
         mContinueButton.setOnClickListener(view -> {
 
-            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
-                try {
-                    if (isSetup) {
-                        mHelper.queryInventoryAsync(mGotInventoryListener);
-                    } else {
-                        Toast.makeText(getApplicationContext(), mSetupMessage, Toast.LENGTH_LONG).show();
-                    }
-
-                } catch (IabHelper.IabAsyncInProgressException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = com.google.common.collect.ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
-                        // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                        .setProductDetails(productDetails)
-                        // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
-                        // for a list of offers that are available to the user
-                        .build());
-                BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
+            ImmutableList<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = ImmutableList.of(BillingFlowParams.ProductDetailsParams.newBuilder()
+                    // retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                    .setProductDetails(productDetails)
+                    // to get an offer token, call ProductDetails.getSubscriptionOfferDetails()
+                    // for a list of offers that are available to the user
+                    .build());
+            BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder().setProductDetailsParamsList(productDetailsParamsList).build();
 
 // Launch the billing flow
-                BillingResult billingResult = billingClient.launchBillingFlow(this, billingFlowParams);
+            BillingResult billingResult = billingClient.launchBillingFlow(this, billingFlowParams);
 
-            }
-//            Log.d(TAG, "Start In App Billing");
+            //            Log.d(TAG, "Start In App Billing");
 
 
             dialog.dismiss();

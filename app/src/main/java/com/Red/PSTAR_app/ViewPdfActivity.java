@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.ymg.pdf.viewer.PDFView;
-import com.ymg.pdf.viewer.listener.OnErrorListener;
+import com.github.barteksc.pdfviewer.PDFView;
+import com.github.barteksc.pdfviewer.listener.OnErrorListener;
+
 
 /**
  * Created by Alexey Matrosov on 27.09.2018.
