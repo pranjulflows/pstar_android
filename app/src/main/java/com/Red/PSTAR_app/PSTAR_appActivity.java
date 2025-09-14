@@ -31,6 +31,7 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
@@ -358,19 +359,15 @@ public class PSTAR_appActivity extends Activity {
 
     private void setupPurchaseNew() {
 
-        billingClient = BillingClient.newBuilder(this).setListener(purchasesUpdatedListener).enablePendingPurchases().build();
+        billingClient = BillingClient.newBuilder(this).setListener(purchasesUpdatedListener).enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build()).build();
 
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
 
-                Log.e(TAG, "onBillingSetupFinished: " + billingResult.getResponseCode());
-                Log.e(TAG, "onBillingSetupFinished: " + billingResult.getDebugMessage());
-
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here.
                     isSetup = true;
-                    Log.e(TAG, "onBillingSetupFinished: ");
                     queryPurchases();
                 }
             }
@@ -393,9 +390,9 @@ public class PSTAR_appActivity extends Activity {
             // check billingResult
             // process returned productDetailsList
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                productDetails = productDetailsList.get(0);
+                productDetails = productDetailsList.getProductDetailsList().get(0);
 
-                Log.e(TAG, productDetailsList.size() + " setupPurchaseNew: " + productDetailsList.get(0).toString());
+                Log.e(TAG, productDetailsList.getProductDetailsList().size() + " setupPurchaseNew: " + productDetailsList.getProductDetailsList().get(0).toString());
                 //This list should contain the products added above
 
             }

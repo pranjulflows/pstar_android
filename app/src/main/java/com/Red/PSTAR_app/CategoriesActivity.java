@@ -38,6 +38,7 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
@@ -107,14 +108,13 @@ public class CategoriesActivity extends Activity implements OnClickListener {
     }
 
     private void setupPurchaseNew() {
-        billingClient = BillingClient.newBuilder(this).setListener(purchasesUpdatedListener).enablePendingPurchases().build();
+        billingClient = BillingClient.newBuilder(this).setListener(purchasesUpdatedListener).enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build()).build();
 
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
                 if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
                     // The BillingClient is ready. You can query purchases here.
-                    Log.e(TAG, "onBillingSetupFinished: ");
                     queryPurchases();
                 }
             }
@@ -138,8 +138,8 @@ public class CategoriesActivity extends Activity implements OnClickListener {
             // check billingResult
             // process returned productDetailsList
             if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                productDetails = productDetailsList.get(0);
-                Log.e(TAG, productDetailsList.size() + " setupPurchaseNew: " + productDetailsList.get(0).toString());
+                productDetails = productDetailsList.getProductDetailsList().get(0);
+                Log.e(TAG, productDetailsList.getProductDetailsList().size() + " setupPurchaseNew: " + productDetailsList.getProductDetailsList().get(0).toString());
                 //This list should contain the products added above
 
             }
@@ -338,7 +338,6 @@ public class CategoriesActivity extends Activity implements OnClickListener {
     }
 
     private void categoryClickImplementations(int scoreIndex, String categoryKey) {
-        Log.e(TAG, categoryKey + " categoryClickImplementations: " + scoreIndex);
         if ((score.get(scoreIndex).right.equalsIgnoreCase(score.get(scoreIndex).total))) {
             resetScoresDialog(categoryKey);
         } else {
